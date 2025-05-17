@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sinadatravel.vercel.app
+/sitemap.xml
