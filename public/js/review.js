@@ -14,6 +14,8 @@ const reviewForm = document.getElementById("review-form");
 const commentInput = document.getElementById("comment");
 const starContainer = document.getElementById("star-rating");
 const reviewList = document.getElementById("review-list");
+const showMoreBtn = document.getElementById("show-more-btn");
+const hideReviewsBtn = document.getElementById("hide-reviews-btn");
 
 let selectedRating = 0;
 const ownerUID = "SNjrJtuDirP1K57RqYaAKG7vPjs2";
@@ -54,11 +56,43 @@ reviewForm.addEventListener("submit", async (e) => {
 
 async function loadReviews(user = null) {
   reviewList.innerHTML = "";
+  if (showMoreBtn) showMoreBtn.style.display = "none";
+  if (hideReviewsBtn) hideReviewsBtn.style.display = "none";
+
   const q = query(collection(db, "reviews"), orderBy("timestamp", "desc"));
   const snapshot = await getDocs(q);
 
+  const reviews = [];
   snapshot.forEach((docSnap) => {
-    const data = docSnap.data();
+    reviews.push({ id: docSnap.id, data: docSnap.data() });
+  });
+
+  const maxVisible = 6;
+  const initialReviews = reviews.slice(0, maxVisible);
+
+  renderReviews(initialReviews, user);
+
+  if (reviews.length > maxVisible && showMoreBtn && hideReviewsBtn) {
+    showMoreBtn.style.display = "inline-block";
+
+    showMoreBtn.onclick = () => {
+      renderReviews(reviews, user);
+      showMoreBtn.style.display = "none";
+      hideReviewsBtn.style.display = "inline-block";
+    };
+
+    hideReviewsBtn.onclick = () => {
+      renderReviews(initialReviews, user);
+      hideReviewsBtn.style.display = "none";
+      showMoreBtn.style.display = "inline-block";
+    };
+  }
+}
+
+function renderReviews(reviewsToRender, user) {
+  reviewList.innerHTML = "";
+
+  reviewsToRender.forEach(({ id, data }) => {
     const div = document.createElement("div");
     div.className = "border p-3 mb-3";
 
@@ -74,7 +108,7 @@ async function loadReviews(user = null) {
       delBtn.textContent = "Delete";
       delBtn.className = "btn btn-sm btn-danger";
       delBtn.onclick = async () => {
-        await deleteDoc(doc(db, "reviews", docSnap.id));
+        await deleteDoc(doc(db, "reviews", id));
         loadReviews(user);
       };
       div.appendChild(delBtn);
