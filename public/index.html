@@ -14,11 +14,6 @@
       content="Discover the beauty of Batam Island with Travel Batam Sinada. Enjoy hassle-free airport transfers, guided city tours, and amazing local experiences. Book your perfect trip today!"
     />
 
-    <meta
-      name="keywords"
-      content="Batam travel, Batam tours, Batam island tours, Batam airport transfer, Batam sightseeing, Batam travel guide, Batam tourism, Batam packages, travel Batam, sewa mobil batam, tour batam, jemput tamu singapore, tour batam murah, dari batam ke korea, paket tour Batam"
-    />
-
     <meta name="author" content="Travel Batam Sinada" />
     <meta name="robots" content="index, follow" />
 
@@ -32,13 +27,27 @@
       content="Book affordable transportation and exciting tours around Batam Island with us. Your adventure starts here!"
     />
 
-    <meta property="og:url" content="https://https://sinadatravel.vercel.app" />
+    <meta property="og:url" content="https://sinadatravelbatam.vercel.app" />
     <meta
       property="og:image"
-      content="https://sinadatravel.vercel.app/images/logo.jpg"
+      content="https://sinadatravelbatam.vercel.app/images/logo.jpg"
     />
 
-    <title>Sinada Travel Batam - Sewa Mobil & Tour Wisata di Batam</title>
+    <!-- meta description SEO -->
+
+    <meta
+      name="description"
+      content="Discover Batam Island with Sinada Travel Batam. Enjoy hassle-free airport transfers, city tours, and exciting local experiences. Book your trip today!"
+    />
+
+    <link rel="icon" href="images/icon.png" type="image/png" />
+
+    <link rel="canonical" href="https://sinadatravelbatam.vercel.app/" />
+
+    <link
+      rel="apple-touch-icon"
+      href="https://sinadatravelbatam.vercel.app/images/icon-180x180.png"
+    />
 
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
@@ -50,6 +59,19 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
     />
     <link rel="stylesheet" href="style.css" />
+
+    <title>Sinada Travel Batam - Sewa Mobil & Tour Wisata di Batam</title>
+
+    <!-- Structured Data untuk SEO -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Sinada Travel Batam",
+        "url": "https://sinadatravelbatam.vercel.app/",
+        "logo": "https://sinadatravelbatam.vercel.app/images/logo.png"
+      }
+    </script>
   </head>
 
   <body>
@@ -97,16 +119,17 @@
     >
       <div class="container">
         <div class="hero-content">
-          <div class="hero-subtitle">LET'S GO</div>
-          <div class="hero-title">SINADA TRAVEL</div>
-          <div class="hero-description">
-            Reliable & Comfortable Travel in Batam
-            <br />
-            Explore Batam with our private transport service safe, clean, and
-            stress-free. Enjoy modern vehicles, professional local drivers, and
-            refreshments. Trusted by travelers from Singapore, Malaysia, Korea,
-            and more. Book now for a smooth, memorable journey!
-          </div>
+          <h2 class="hero-subtitle">LET'S GO</h2>
+
+          <h1 class="hero-title">
+            <span class="hero-line-1">SINADA TRAVEL</span><br />
+            <span class="hero-line-2">BATAM</span>
+          </h1>
+
+          <p class="hero-description">
+            Safe, clean, and comfortable travel in Batam with trusted local
+            drivers. Book now for a smooth, memorable journey!
+          </p>
 
           <a href="#Tour-Packages" class="btn btn-destinations mt-3"
             >Destinations</a
@@ -114,7 +137,9 @@
 
           <div class="social-icons mt-4">
             <a href="#"><i class="bi bi-tiktok"></i></a>
-            <a href="#"><i class="bi bi-instagram"></i></a>
+            <a href="https://www.instagram.com/sinadagroup/">
+              <i class="bi bi-instagram"></i>
+            </a>
           </div>
         </div>
       </div>
@@ -659,10 +684,30 @@
       </div>
     </section>
 
+    <!-- travelers review -->
     <section class="container mt-5" id="Reviews">
       <h2 class="text-center mb-4">Traveler Reviews</h2>
-      <div id="review-list" class="mb-4"></div>
 
+      <!-- Review List -->
+      <div id="review-list" class="mt-4"></div>
+
+      <!-- Tombol Show/Hide Review -->
+      <div class="text-center mt-3">
+        <a
+          id="show-more-btn"
+          class="btn btn-link text-white text-decoration-none"
+          style="display: none"
+          >SHOW MORE REVIEWS</a
+        >
+        <a
+          id="hide-reviews-btn"
+          class="btn btn-link text-white text-decoration-none"
+          style="display: none"
+          >HIDE REVIEWS</a
+        >
+      </div>
+
+      <!-- User Info and Auth Buttons -->
       <div class="mb-3">
         <span id="userInfo"></span>
         <button id="loginBtn" class="btn btn-success">
@@ -673,6 +718,7 @@
         </button>
       </div>
 
+      <!-- Review Submission Form -->
       <h4>Leave a Review</h4>
       <form id="review-form">
         <div class="mb-3">
