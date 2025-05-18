@@ -45,6 +45,35 @@ html {
   border: none;
 }
 
+@media (max-width: 576px) {
+  .hero-subtitle {
+    font-size: 30px;
+    letter-spacing: 1px;
+    margin-bottom: -30px;
+  }
+
+  .hero-title {
+    font-size: 28px;
+    line-height: 1.2;
+  }
+
+  .hero-title .hero-line-1 {
+    display: inline-block;
+    font-size: 40px;
+  }
+
+  .hero-title .hero-line-2 {
+    display: block;
+    font-size: 40px;
+    margin-top: 1px;
+  }
+
+  .hero-description {
+    font-size: 13px;
+    margin-top: 15px;
+  }
+}
+
 .social-icons {
   margin-top: 2rem;
 }
@@ -54,6 +83,22 @@ html {
   margin-right: 15px;
   font-size: 1.5rem;
   text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease,
+    background-color 0.3s ease;
+  background-color: transparent;
+}
+
+.social-icons a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: scale(1.2) rotateX(10deg) rotateY(10deg);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+  color: #eb4495;
 }
 
 /* Ukuran teks lebih besar dan jelas */
