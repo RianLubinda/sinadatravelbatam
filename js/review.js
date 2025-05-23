@@ -7,6 +7,7 @@ import {
   doc,
   query,
   orderBy,
+  timestamp,
 } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
 
@@ -45,7 +46,8 @@ reviewForm.addEventListener("submit", async (e) => {
       name: user.displayName || "Anonymous",
       comment: comment,              // ubah dari text ke comment
       rating: selectedRating,
-      timestamp: new Date(),         // ubah dari createdAt ke timestamp
+      timestamp: timestamp.fromDate(new Date()),  // pakai Firestore Timestamp
+
     });
 
     commentInput.value = "";
