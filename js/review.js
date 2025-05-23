@@ -41,12 +41,13 @@ reviewForm.addEventListener("submit", async (e) => {
   const comment = commentInput.value.trim();
   if (comment && selectedRating) {
     await addDoc(collection(db, "reviews"), {
-      uid: user.uid,
-      name: user.displayName || "Anonymous",
-      comment,
-      rating: selectedRating,
-      timestamp: new Date(),
-    });
+  userId: user.uid,
+  name: user.displayName || "Anonymous",
+  text: comment,
+  rating: selectedRating,
+  createdAt: new Date(),
+});
+
 
     commentInput.value = "";
     selectedRating = 0;
