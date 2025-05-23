@@ -13,7 +13,11 @@ const userInfo = document.getElementById("userInfo");
 
 // Login
 loginBtn.addEventListener("click", () => {
-  signInWithPopup(auth, provider);
+  signInWithPopup(auth, provider)
+    .catch((error) => {
+      console.error("Login gagal:", error.message);
+      alert("Login gagal. Silakan coba lagi.");
+    });
 });
 
 // Logout
