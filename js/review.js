@@ -41,13 +41,12 @@ reviewForm.addEventListener("submit", async (e) => {
   const comment = commentInput.value.trim();
   if (comment && selectedRating) {
     await addDoc(collection(db, "reviews"), {
-  userId: user.uid,
-  name: user.displayName || "Anonymous",
-  text: comment,
-  rating: selectedRating,
-  createdAt: new Date(),
-});
-
+      uid: user.uid,                 // ubah dari userId ke uid
+      name: user.displayName || "Anonymous",
+      comment: comment,              // ubah dari text ke comment
+      rating: selectedRating,
+      timestamp: new Date(),         // ubah dari createdAt ke timestamp
+    });
 
     commentInput.value = "";
     selectedRating = 0;
@@ -104,6 +103,7 @@ function renderReviews(reviewsToRender, user) {
       <p>${data.comment}</p>
     `;
 
+    // Hanya ownerUID yang bisa hapus review
     if (user?.uid === ownerUID) {
       const delBtn = document.createElement("button");
       delBtn.textContent = "Delete";
