@@ -7,7 +7,6 @@ import {
   doc,
   query,
   orderBy,
-  timestamp,
 } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
 
@@ -18,9 +17,12 @@ const reviewList = document.getElementById("review-list");
 const showMoreBtn = document.getElementById("show-more-btn");
 const hideReviewsBtn = document.getElementById("hide-reviews-btn");
 
-let selectedRating = 0;
+// Ganti dengan UID Google kamu (owner)
 const ownerUID = "SNjrJtuDirP1K57RqYaAKG7vPjs2";
 
+let selectedRating = 0;
+
+// Event klik bintang rating
 starContainer.addEventListener("click", (e) => {
   if (e.target.dataset.value) {
     selectedRating = parseInt(e.target.dataset.value);
@@ -30,6 +32,7 @@ starContainer.addEventListener("click", (e) => {
   }
 });
 
+// Submit form review
 reviewForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -40,22 +43,42 @@ reviewForm.addEventListener("submit", async (e) => {
   }
 
   const comment = commentInput.value.trim();
-  if (comment && selectedRating) {
-    await addDoc(collection(db, "reviews"), {
-      uid: user.uid,                 // ubah dari userId ke uid
-      name: user.displayName || "Anonymous",
-      comment: comment,              // ubah dari text ke comment
-      rating: selectedRating,
-      timestamp: timestamp.fromDate(new Date()),  // pakai Firestore Timestamp
+  if (!comment) {
+    alert("Komentar tidak boleh kosong.");
+    return;
+  }
+  if (comment.length < 5) {
+    alert("Komentar minimal 5 karakter.");
+    return;
+  }
+  if (selectedRating < 1 || selectedRating > 5) {
+    alert("Silakan pilih rating bintang.");
+    return;
+  }
 
+  try {
+    await addDoc(collection(db, "reviews"), {
+      uid: user.uid,
+      name: user.displayName || "Anonymous",
+      comment: comment,
+      rating: selectedRating,
+      timestamp: new Date(),
     });
 
     commentInput.value = "";
     selectedRating = 0;
+    Array.from(starContainer.children).forEach((star) => {
+      star.classList.remove("text-warning");
+    });
+
     loadReviews(user);
+  } catch (error) {
+    console.error("Gagal menambahkan review:", error);
+    alert("Terjadi kesalahan saat mengirim review.");
   }
 });
 
+// Load dan render review
 async function loadReviews(user = null) {
   reviewList.innerHTML = "";
   if (showMoreBtn) showMoreBtn.style.display = "none";
@@ -91,6 +114,7 @@ async function loadReviews(user = null) {
   }
 }
 
+// Render list review
 function renderReviews(reviewsToRender, user) {
   reviewList.innerHTML = "";
 
@@ -105,14 +129,16 @@ function renderReviews(reviewsToRender, user) {
       <p>${data.comment}</p>
     `;
 
-    // Hanya ownerUID yang bisa hapus review
-    if (user?.uid === ownerUID) {
+    // Owner (email atau uid) bisa hapus semua review
+    if (user && user.uid === ownerUID) {
       const delBtn = document.createElement("button");
       delBtn.textContent = "Delete";
       delBtn.className = "btn btn-sm btn-danger";
       delBtn.onclick = async () => {
-        await deleteDoc(doc(db, "reviews", id));
-        loadReviews(user);
+        if (confirm("Yakin ingin menghapus review ini?")) {
+          await deleteDoc(doc(db, "reviews", id));
+          loadReviews(user);
+        }
       };
       div.appendChild(delBtn);
     }
@@ -121,6 +147,12 @@ function renderReviews(reviewsToRender, user) {
   });
 }
 
+// Tampilkan/simpan form review hanya jika user login
 onAuthStateChanged(auth, (user) => {
+  if (user) {
+    reviewForm.style.display = "block";
+  } else {
+    reviewForm.style.display = "none";
+  }
   loadReviews(user);
 });
