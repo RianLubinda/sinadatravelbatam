@@ -302,8 +302,9 @@ html {
   height: 120px;
   object-fit: cover;
   border-radius: 50%;
-  margin: 0 auto;
+  background-color: white;
   display: block;
+  margin: 0 auto;
 }
 
 .sponsor-item p {
