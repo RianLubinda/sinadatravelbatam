@@ -8,7 +8,7 @@
       }
     });
   }, {
-    threshold: 1.0 // aktif saat setengah elemen terlihat
+    threshold: 0.4 // aktif saat setengah elemen terlihat
   });
 
   // Apply ke semua sponsor item
