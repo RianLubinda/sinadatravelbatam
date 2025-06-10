@@ -269,12 +269,18 @@ html {
 }
 
 
- /* Hover default untuk semua layar */
+/*our sponsoship  */
   #oursponsorship a {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+    color: inherit;
   }
 
-  /* Hover efek saat cursor di desktop */
+  #oursponsorship a p {
+    text-decoration: none;
+    color: inherit;
+  }
+
   @media (hover: hover) {
     #oursponsorship a:hover {
       transform: translateY(-5px);
@@ -282,13 +288,7 @@ html {
     }
   }
 
-  /* Hover efek via JavaScript scroll */
   #oursponsorship a.hovered {
     transform: translateY(-5px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   }
-
-#oursponsorship a p {
-  text-decoration: none;
-  color: inherit; /* Ikuti warna teks induk */
-}
