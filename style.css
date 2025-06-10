@@ -268,35 +268,45 @@ html {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+/*aor sponsorship  */
+#oursponsorship {
+  padding: 60px 0;
+  background: #FCEF91;
+  text-align: center;
+}
 
-/*our sponsoship  */
-  #oursponsorship a {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    text-decoration: none;
-    color: #000;
-  }
+.sponsorship-header h2 {
+  color: #000;
+  margin-bottom: 30px;
+}
 
-  #oursponsorship a p {
-    text-decoration: none;
-    color: inherit;
-  }
+.sponsorship-wrapper {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 40px;
+}
 
-  @media (hover: hover) {
-    #oursponsorship a:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    }
-  }
+.sponsor-item {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  width: 160px;
+  text-align: center;
+  text-decoration: none;
+  color: black;
+}
 
-  #oursponsorship a.hovered {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  }
-
-#oursponsorship img {
+.sponsor-item img {
   width: 120px;
   height: 120px;
   object-fit: cover;
   border-radius: 50%;
   margin: 0 auto;
+  display: block;
+}
+
+.sponsor-item p {
+  margin-top: 10px;
+  font-weight: bold;
 }
