@@ -1,28 +1,17 @@
-function activateCenterCard() {
-    const cards = document.querySelectorAll('.sponsor-card');
-    let closestCard = null;
-    let minDistance = Infinity;
-    const centerY = window.innerHeight / 2;
-
-    cards.forEach(card => {
-      const rect = card.getBoundingClientRect();
-      const cardCenter = rect.top + rect.height / 2;
-      const distance = Math.abs(centerY - cardCenter);
-
-      if (distance < minDistance) {
-        minDistance = distance;
-        closestCard = card;
+ // Fungsi untuk deteksi apakah elemen berada di tengah layar
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('hovered');
+      } else {
+        entry.target.classList.remove('hovered');
       }
     });
+  }, {
+    threshold: 0.5 // aktif saat setengah elemen terlihat
+  });
 
-    // Remove 'active' from all cards
-    cards.forEach(card => card.classList.remove('active'));
-
-    // Add 'active' to the closest one
-    if (closestCard) closestCard.classList.add('active');
-  }
-
-  // Aktifkan saat scroll & saat load
-  window.addEventListener('scroll', activateCenterCard);
-  window.addEventListener('load', activateCenterCard);
-  window.addEventListener('resize', activateCenterCard);
+  // Apply ke semua sponsor item
+  document.querySelectorAll('.sponsor-item').forEach(item => {
+    observer.observe(item);
+  });
